@@ -1,16 +1,18 @@
 CC = g++
-CFLAGS = -std=c++17 -Wall -Wextra -pedantic -fsanitize=address,undefined
-LIBFLAGS = -std=c++17
-LIBS = -lfltk -lfltk_image
+CFLAGS = -std=c++17 -Wall -Wextra -pedantic
+LIBS = -lfltk -lfltk_images
+SRC = $(wildcard src/*cpp)
+OBJ = $(SRC:.cpp=.o)
 
-all: build/PROJECT.o build/DEPENDENCIES.o
-	$(CC) $(LIBFLAGS) build/PROJECT.o build/DEPENDENCIES.o -o bin/PROJECT
+all: $(SRC) PROJECT
 
-build/PROJECT.o:
-	$(CC) $(CFLAGS) -c src/*cpp -o build/PROJECT.o
+PROJECT: $(OBJ)
+	$(CC) build/$(OBJ:src/%=%) build/DEPENDENCIES.a -o bin/PROJECT $(LIBS)
 
-build/DEPENDENCIES.o:
-	$(CC) $(LIBFLAGS) -c include/*cpp $(LIBS) -o build/DEPENDENCIES.o
+.cpp.o:
+	$(CC) $(CFLAGS) -c $< -o build/$(@:src/%=%)
 
 clean:
-	rm -f build/*
+	rm -f build/*o
+
+rebuild: clean all

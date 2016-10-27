@@ -16,6 +16,11 @@
 #ifndef GRAPH_GUARD
 #define GRAPH_GUARD 1
 
+#ifdef __GNUC__
+// (Zach 10/26) Prevent warnings from this file when included
+#pragma GCC system_header
+#endif
+
 #include <FL/fl_draw.H>
 #include <FL/Fl_Image.H>
 #include "Point.h"

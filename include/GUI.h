@@ -7,6 +7,11 @@
 #ifndef GUI_GUARD
 #define GUI_GUARD
 
+#ifdef __GNUC__
+// (Zach 10/26) Prevent warnings from this file when included
+#pragma GCC system_header
+#endif
+
 #include "Window.h"
 #include "Graph.h"
 
