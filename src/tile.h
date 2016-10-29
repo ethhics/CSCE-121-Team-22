@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <ctime>
 
 namespace Tile {
 
@@ -57,17 +58,19 @@ class Tileset {
   // This class defines a group of tiles. The value can be calculated by using
   // the calculator.
   // Initialization requires the size of the tileset
-  // add(Tile) to add a tile, can be chained!
-  // add_random();
+  // add_random() adds a random tile to the tileset
   // getTiles() returns the vector of tiles for non-implemented uses
   // swap_tiles(Tile,Tile) swaps the order of two Tiles
   // getValueString() returns a string of all tile values in order
   // getValueDouble() returns getValueString() passed to the calculator
  private:
-  Tile *tiles[];
+  std::vector<Tile *> tiles;
+  int num_tiles;
+  void add_random(int&, int&, int&);
+  TileType random_number();
+  TileType random_operator();
  public:
-  Tileset(int n) { tiles[n]; }
-  Tileset& add(Tile &t) { tiles.push_back(&t); return *this; }
+  Tileset(int n);
   std::vector<Tile *> getTiles() { return tiles; }
   void swap_tiles(Tile &, Tile &);
   std::string getValueString();
