@@ -9,10 +9,12 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
 
 namespace Tile {
 
-int TileUID = 0;  // Unique identifier to differentiate tiles with same type
+static int TileUID = 0;  // Unique identifier for each individual tile
+//TODO(Zach) Possible runtime error? static makes an instance for each include!
 
 enum TileType {
   // This enum defines all types of tiles and their corresponding character
@@ -54,15 +56,21 @@ class Tile {
 class Tileset {
   // This class defines a group of tiles. The value can be calculated by using
   // the calculator.
+  // Initialization requires the size of the tileset
+  // add(Tile) to add a tile, can be chained!
+  // add_random();
+  // getTiles() returns the vector of tiles for non-implemented uses
   // swap_tiles(Tile,Tile) swaps the order of two Tiles
   // getValueString() returns a string of all tile values in order
   // getValueDouble() returns getValueString() passed to the calculator
  private:
-  std::vector<Tile *> tiles;
+  Tile *tiles[];
  public:
-  Tileset() {}
+  Tileset(int n) { tiles[n]; }
+  Tileset& add(Tile &t) { tiles.push_back(&t); return *this; }
+  std::vector<Tile *> getTiles() { return tiles; }
   void swap_tiles(Tile &, Tile &);
-  string getValueString();
+  std::string getValueString();
   double getValueDouble();
 };  // end Tile::Tileset
 

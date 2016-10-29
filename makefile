@@ -7,7 +7,7 @@ OBJ = $(SRC:.cpp=.o)
 all: $(SRC) PROJECT
 
 PROJECT: $(OBJ)
-	$(CC) build/$(OBJ:src/%=%) build/DEPENDENCIES.a -o bin/PROJECT $(LIBS)
+	$(CC) $(OBJ:src/%=build/%) build/DEPENDENCIES.a -o bin/PROJECT $(LIBS)
 
 .cpp.o:
 	$(CC) $(CFLAGS) -c $< -o build/$(@:src/%=%)
