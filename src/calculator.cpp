@@ -15,7 +15,7 @@ Token_stream::Token_stream()
 
 // putback() puts back...
 void Token_stream::putback(Token t) {
-  if (full) error("putback() into a full buffer");
+  if (full) throw std::exception();
   buffer = t;       // copy t to buffer
   full = true;      // buffer is now full
 }
@@ -43,7 +43,7 @@ Token Token_stream::get() {
     c_in >> val;              // read a floating-point number
     return Token('8', val);   // let '8' represent "a number"
   default:
-    error("Bad token");
+    throw std::exception();
   }
   return Token('8', 0.0);  // Complaints from g++
 }
@@ -56,7 +56,7 @@ double Calculator::primary() {
       {  // In braces because d is needed only for this case
         double d = expression();
         t = ts.get();
-        if (t.kind != ')') error("')' expected");
+        if (t.kind != ')') throw std::exception();
         return d;
       }
     case '8':            // we use '8' to represent a number
@@ -66,7 +66,7 @@ double Calculator::primary() {
     case '+':
       return primary();
     default:
-      error("primary expected");
+      throw std::exception();
   }
   return 0.0;  // Complaints from g++
 }
@@ -85,7 +85,7 @@ double Calculator::term() {
     case '/':
       {  // In braces because d is needed only for this case
         double d = primary();
-        if (d == 0) error("divide by zero");
+        if (d == 0) std::exception();
         left /= d;
         t = ts.get();
         break;
@@ -119,9 +119,13 @@ double Calculator::expression() {
   }
 }
 
-double Calculator::calculate(string calc_in) {
-  c_in.str(string());
+double Calculator::calculate(std::string calc_in) {
+  c_in.str(std::string());
   c_in.clear();
   c_in << calc_in << "=";
-  return expression();
+  try {
+    return expression();
+  } catch(...) {  // There's an error, must be the luser's fault.
+    return 0.0;
+  }
 }

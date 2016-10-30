@@ -7,7 +7,8 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include "../include/std_lib_facilities_4.h"
+#include <sstream>
+#include <string>
 
 namespace Calculator {
 
@@ -32,13 +33,13 @@ class Token_stream {
 };
 
 static Token_stream ts;        // provides get() and putback()
-static stringstream c_in;
+static std::stringstream c_in;
 
 double expression();
 double primary();
 double term();
 
-double calculate(string);
+double calculate(std::string);
 
 }  // end namespace Calculator
 

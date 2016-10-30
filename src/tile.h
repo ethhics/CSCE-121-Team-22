@@ -11,6 +11,7 @@
 #include <vector>
 #include <sstream>
 #include <ctime>
+#include "calculator.h"
 
 namespace Tile {
 

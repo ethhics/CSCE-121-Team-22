@@ -8,6 +8,7 @@
 using Tile::TileType;
 using Tile::Tileset;
 using Tile::Tile;
+using Calculator::calculate;
 
 void Tileset::add_random(int &nums, int &ops, int &parens) {
   bool made_tile = false;
@@ -133,4 +134,10 @@ std::string Tileset::getValueString() {
     tileset_value << t->getValue();
   }
   return tileset_value.str();
+}
+
+double Tileset::getValueDouble() {
+  // Use the code in calculator.cpp and its corresponding .h file to calculate
+  // the value of our tileset
+  return calculate(getValueString());
 }
