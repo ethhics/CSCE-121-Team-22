@@ -17,7 +17,7 @@
 
 */
 
-#include "std_lib_facilities_4.h"
+#include "../include/std_lib_facilities_4.h"
 
 //------------------------------------------------------------------------------
 
@@ -89,6 +89,7 @@ Token Token_stream::get()
     default:
         error("Bad token");
     }
+    return Token('8',0.0);  // Complaints from g++
 }
 
 //------------------------------------------------------------------------------
@@ -115,9 +116,14 @@ double primary()
         }
     case '8':            // we use '8' to represent a number
         return t.value;  // return the number's value
+    case '-':
+        return -primary();
+    case '+':
+        return primary();
     default:
         error("primary expected");
     }
+    return 0.0;  // Complaints from g++
 }
 
 //------------------------------------------------------------------------------
@@ -201,16 +207,13 @@ try
             val = expression();
         }
     }
-	keep_window_open();
 }
 catch (exception& e) {
     cerr << "error: " << e.what() << '\n'; 
-	keep_window_open();
     return 1;
 }
 catch (...) {
     cerr << "Oops: unknown exception!\n"; 
-	keep_window_open();
     return 2;
 }
 }
