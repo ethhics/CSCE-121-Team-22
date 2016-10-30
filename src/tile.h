@@ -16,7 +16,6 @@
 namespace Tile {
 
 static int TileUID = 0;  // Unique identifier for each individual tile
-//TODO(Zach) Possible runtime error? static makes an instance for each include!
 
 enum TileType {
   // This enum defines all types of tiles and their corresponding character

@@ -44,7 +44,7 @@ void Tileset::add_random(int &nums, int &ops, int &parens) {
 
 TileType Tileset::random_number() {
   int new_number = rand() % 10;  // 0 to 9
-  switch (new_number) {  // TODO(Zach) make this a more elegant solution
+  switch (new_number) {
     case 0:
       return TileType::ZERO;
     case 1:
@@ -66,12 +66,12 @@ TileType Tileset::random_number() {
     case 9:
       return TileType::NINE;
   }
-  return TileType::ZERO;  // TODO(Zach) error if it reaches here (not a number)
+  return TileType::ZERO;  // Never reaches here, but g++ error if I don't include this
 }
 
 TileType Tileset::random_operator() {
   int new_operator = rand() % 4;  // ASMD
-  switch (new_operator) {  // TODO(Zach) make this a more elegant solution
+  switch (new_operator) {
     case 0:
       return TileType::PLUS;
     case 1:
@@ -81,7 +81,7 @@ TileType Tileset::random_operator() {
     case 3:
       return TileType::DIVIDE;
   }
-  return TileType::PLUS;  // TODO(Zach) erro if it reaches here (not an op)
+  return TileType::PLUS;  // g++ error if not here
 }
 
 Tileset::Tileset(int n): num_tiles(n) {
@@ -121,7 +121,10 @@ void Tileset::swap_tiles(Tile &t1, Tile &t2) {
       break;  // We know where the tile is! Keep the iterator where it is
     }
   }
-  // TODO(Zach) error if t1 or t2 aren't in the tileset
+  if (tile1_location == tiles.end() || tile2_location == tiles.end()) {
+    // One or both tiles aren't in the tileset!
+    throw std::exception();
+  }
   std::iter_swap(tile1_location, tile2_location);
 }
 
