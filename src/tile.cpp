@@ -33,8 +33,8 @@ void Tileset::add_random(int &nums, int &ops, int &parens)
         case 2:  // Make a paren
             if (parens > 0) {
                 parens--;  // Split odd and even so that there's matching parens
-                if (parens % 2 == 0) { tiles.push_back(new Tile(TileType::LPAREN)); }
-                else { tiles.push_back(new Tile(TileType::RPAREN)); }
+                if (parens % 2 == 0) tiles.push_back(new Tile(TileType::LPAREN));
+                else tiles.push_back(new Tile(TileType::RPAREN));
                 made_tile = true;
             }
             break;
