@@ -10,11 +10,11 @@
 using Calculator::calculate;
 
 int main() {
-  std::cout << "Enter an expression ";
-  std::string expr;
-  while (std::cin >> expr) {
-    std::cout << calculate(expr) << std::endl;
-    std::cout << "Enter an expression ";
-  }
-  return 0;
+	std::cout << "Enter an expression ";
+	std::string expr;
+	while (std::cin >> expr) {
+		std::cout << calculate(expr) << std::endl;
+		std::cout << "Enter an expression ";
+	}
+	return 0;
 }
