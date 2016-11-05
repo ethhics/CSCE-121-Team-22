@@ -35,6 +35,7 @@ enum TileType {
     MINUS    = '-',
     MULTIPLY = '*',
     DIVIDE   = '/',
+    FACTORIAL = '!',
     LPAREN   = '(',
     RPAREN   = ')'
 };  // end Tile::TileType
@@ -66,7 +67,7 @@ class Tileset {
 private:
     std::vector<Tile *> tiles;
     int num_tiles;
-    void add_random(int&, int&, int&);
+    void add_random(int&, int&, int&, int&);
     TileType random_number();
     TileType random_operator();
 public:

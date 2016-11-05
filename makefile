@@ -14,7 +14,7 @@ PROJECT: $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o build/$(@:src/%=%)
 
 clean:
-	rm -f build/*o
+	rm -f build/*o bin/*
 
 rebuild: clean all
 

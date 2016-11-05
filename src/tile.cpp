@@ -10,11 +10,11 @@ using Tile::Tileset;
 using Tile::Tile;
 using Calculator::calculate;
 
-void Tileset::add_random(int &nums, int &ops, int &parens)
+void Tileset::add_random(int &nums, int &ops, int &parens, int &facts)
 {
     bool made_tile = false;
     while (!made_tile) {
-        int rand_type = rand() % 3;
+        int rand_type = rand() % 4;
         switch (rand_type) {
         case 0:  // Make a number
             if (nums > 0) {
@@ -35,6 +35,13 @@ void Tileset::add_random(int &nums, int &ops, int &parens)
                 parens--;  // Split odd and even so that there's matching parens
                 if (parens % 2 == 0) tiles.push_back(new Tile(TileType::LPAREN));
                 else tiles.push_back(new Tile(TileType::RPAREN));
+                made_tile = true;
+            }
+            break;
+        case 3:  // Make a factorial
+            if (facts > 0) {
+                facts--;
+                tiles.push_back(new Tile(TileType::FACTORIAL));
                 made_tile = true;
             }
             break;
@@ -92,20 +99,37 @@ Tileset::Tileset(int n): num_tiles(n)
     //std::srand(std::time(0));
     // Start by finding out how many of each type we will make. The rules:
     // 1. More numbers than operators
-    // 2. At least 1 operator
+    // 2. At least 1 non-factorial operator
     // 3. Even number of parentheses
-    int num_operators = 1 + (rand() % ((num_tiles - 1) / 2));
+    // 4. Factorials less than or equal to numbers
+
+    // If there's more numbers than operators, then edge case would be n/2+1
+    // numbers and n/2 operators. There's also at least 1 operator, and
+    // rand()%m will return at most m-1.
+    int num_operators = 1 + rand() % ((num_tiles - 1) / 2);
+    int num_numbers = num_tiles - num_operators;
+
     int num_parens = 0;
     if (((num_operators + 1) / 2) > 0) {  // Don't make parens if not enough operators
         num_parens = 2 * (rand() % ((num_operators + 1) / 2));
     }
-    int num_numbers   = num_tiles - num_operators;
-
     num_operators -= num_parens;  // Remove parentheses from count
+
+    int num_factorials = 0;
+    if (num_operators > 1) { // Don't make factorial if not enough operators
+        int max_factorials;
+        int limit_operators = num_operators - 1; // Either ops can limit,
+        int limit_numbers = num_numbers;         // Or nums can
+        if (limit_operators > limit_numbers) max_factorials = limit_numbers;
+        else max_factorials = limit_operators;
+
+        num_factorials = rand() % max_factorials;
+    }
+    num_operators -= num_factorials;
 
     // Now, generate from each type randomly
     while (n-- > 0) {
-        add_random(num_numbers, num_operators, num_parens);
+        add_random(num_numbers, num_operators, num_parens, num_factorials);
     }
 }
 
