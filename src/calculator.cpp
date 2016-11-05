@@ -106,7 +106,11 @@ double Calculator::term()
             // arrive at the equation n! = n * tgamma(n).
             // It doesn't work for n<0. Well it does in some cases, but let's
             // make it easy on ourselves and just say it doesn't.
-            return left * std::tgamma(left);
+
+            t = ts.get();  // If a number follows it should throw an error
+            if (t.kind == '8') throw std::exception();
+            left *= std::tgamma(left);
+            break;
         default:
             ts.putback(t);     // put t back into the token stream
             return left;
@@ -123,10 +127,22 @@ double Calculator::expression()
     while (true) {
         switch (t.kind) {
         case '+':
+            t = ts.get();
+            // Issue #12, without this test the calculator assumes that
+            // following +- are the sign of the next term.
+            if (t.kind == '+' || t.kind == '-') throw std::exception();
+            ts.putback(t);
+
             left += term();    // evaluate Term and add
             t = ts.get();
             break;
         case '-':
+            t = ts.get();
+            // Issue #12, without this test the calculator assumes that
+            // following +- are the sign of the next term.
+            if (t.kind == '+' || t.kind == '-') throw std::exception();
+            ts.putback(t);
+
             left -= term();    // evaluate Term and subtract
             t = ts.get();
             break;
