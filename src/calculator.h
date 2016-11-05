@@ -9,6 +9,8 @@
 
 #include <sstream>
 #include <string>
+#include <cmath>
+#include <iostream>
 
 namespace Calculator {
 

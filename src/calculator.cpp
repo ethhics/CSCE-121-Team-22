@@ -35,7 +35,7 @@ Token Token_stream::get()
     switch (ch) {
     case '=':    // for "print"
     case 'x':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/':
+    case '(': case ')': case '+': case '-': case '*': case '/': case '!':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -94,6 +94,19 @@ double Calculator::term()
                 t = ts.get();
                 break;
             }
+        case '!':
+            // We can't do negative factorials, and n>10 would be really big
+            if (left >= 10 || left < 0) throw std::exception();
+
+            if (left == 0) return 1; // 0! = 1 by definition
+
+            // We're going to use the Gamma function to find the factorial of a
+            // double. It's defined in the standard library as of C++11 as
+            // std::tgamma. tgamma(n) = (n-1)!, and since n! = n*(n-1)! we
+            // arrive at the equation n! = n * tgamma(n).
+            // It doesn't work for n<0. Well it does in some cases, but let's
+            // make it easy on ourselves and just say it doesn't.
+            return left * std::tgamma(left);
         default:
             ts.putback(t);     // put t back into the token stream
             return left;
