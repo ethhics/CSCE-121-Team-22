@@ -21,6 +21,12 @@ void Token_stream::putback(Token t)
 	full = true;	  // buffer is now full
 }
 
+void Token_stream::clear()
+{
+	buffer = Token(0);
+	full = false;
+}
+
 Token Token_stream::get()
 {
 	if (full) {    // do we already have a Token ready?
@@ -70,8 +76,8 @@ double Calculator::primary() {
 		return primary();
 	default:
 		throw std::exception();
-  }
-  return 0.0;  // Complaints from g++
+	}
+	return 0.0;  // Complaints from g++
 }
 
 // deal with *, /, and %
@@ -148,6 +154,7 @@ double Calculator::expression()
 			break;
 		default:
 			if (t.kind != '=') ts.putback(t);  // put t back into the token stream
+			if (t.kind == ')') throw std::exception();
 			return left;       // finally: no more + or -: return the answer
 		}
 	}
@@ -157,6 +164,9 @@ double Calculator::calculate(std::string calc_in) {
 	c_in.str(std::string());
 	c_in.clear();
 	c_in << calc_in << "=";
+
+	ts.clear();
+
 	try {
 		return expression();
 	} catch(...) {	// There's an error, must be the luser's fault.

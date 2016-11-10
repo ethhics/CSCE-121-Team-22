@@ -29,6 +29,7 @@ public:
 	Token_stream();   // make a Token_stream that reads from cin
 	Token get();      // get a Token (get() is defined elsewhere)
 	void putback(Token t);    // put a Token back
+	void clear();     // clear the buffer in case it's full
 private:
 	bool full;        // is there a Token in the buffer?
 	Token buffer;     // here is where we keep a Token put back using putback()

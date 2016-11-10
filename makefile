@@ -8,7 +8,7 @@ TESTS := $(wildcard src/test/*cpp)
 all: $(SRC) PROJECT
 
 PROJECT: $(OBJ)
-	$(CC) $(OBJ:src/%=build/%) build/DEPENDENCIES.a -o bin/PROJECT $(LIBS)
+	-$(CC) $(OBJ:src/%=build/%) build/DEPENDENCIES.a -o bin/PROJECT $(LIBS)
 
 .cpp.o:
 	$(CC) $(CFLAGS) -c $< -o build/$(@:src/%=%)
@@ -18,7 +18,7 @@ clean:
 
 rebuild: clean all
 
-test: $(TESTS:src/test/%.cpp=bin/%)
+test: rebuild $(TESTS:src/test/%.cpp=bin/%)
 
 bin/%: src/test/%.cpp
 	$(CC) $(CFLAGS) $(OBJ:src/%=build/%) build/DEPENDENCIES.a $< -o $@ $(LIBS)
