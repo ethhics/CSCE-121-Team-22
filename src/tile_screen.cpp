@@ -20,6 +20,7 @@ void TileButton::move(Point xy)
 	button->move(x, y);
 }
 
+// Change the numbers in this method to change where all of the things are
 tile_screen::tile_screen(int num_tiles, Point xy, int w, int h, const string& title)
 	:Window {xy, w, h, title},
 	calculate {Point{600,450}, 150, 100, "Calculate!",
@@ -44,12 +45,15 @@ tile_screen::tile_screen(int num_tiles, Point xy, int w, int h, const string& ti
 
 void tile_screen::pushTilesLeft()
 {
+	// Go through each of the locations from left to right
 	for (unsigned int i = 0; i < locations.size(); ++i) {
 		TileLocation *tl = locations[i];
-		if (tl->tilebutton == nullptr) {
+		if (tl->tilebutton == nullptr) { // If the location doesn't have a tile
 			for (unsigned int j = i; j < locations.size(); ++j) {
+				// Start there and find the next location that does
 				TileLocation *tl_next = locations[j];
 				if (tl_next->tilebutton != nullptr) {
+					// If we find a non-empty location, take its tile
 					tl->tilebutton = tl_next->tilebutton;
 					tl_next->tilebutton = nullptr;
 
@@ -103,8 +107,6 @@ bool tile_screen::tiles_on_top()
 
 string tile_screen::get_string()
 {
-	// Well, we haven't implemented a way to order the tiles differently, so
-	// we'll just return the tileset's string
 	std::stringstream ss;
 	for (TileLocation *tl : locations) {
 		if (tl->tilebutton == nullptr) { continue; }
@@ -127,6 +129,7 @@ void tile_screen::get_value()
 
 int main()
 {
+	// The first number is the number of tiles, this is where input goes
 	tile_screen window {5, Point{100,100}, 800, 600, "Tiles"};
 	return gui_main();
 }
