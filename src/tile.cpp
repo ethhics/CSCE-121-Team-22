@@ -96,7 +96,7 @@ TileType Tileset::random_operator()
 
 Tileset::Tileset(int n): num_tiles(n)
 {
-	//std::srand(std::time(0));
+	std::srand(std::time(0));
 	// Start by finding out how many of each type we will make. The rules:
 	// 1. More numbers than operators
 	// 2. At least 1 non-factorial operator
