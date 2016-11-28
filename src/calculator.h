@@ -14,7 +14,8 @@
 
 namespace Calculator {
 
-class Token {
+class Token
+{
 public:
 	char kind;        // what kind of token
 	double value;     // for numbers: a value
@@ -24,7 +25,8 @@ public:
 		:kind(ch), value(val) { }
 };
 
-class Token_stream {
+class Token_stream
+{
 public:
 	Token_stream();   // make a Token_stream that reads from cin
 	Token get();      // get a Token (get() is defined elsewhere)

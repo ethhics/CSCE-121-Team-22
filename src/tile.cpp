@@ -10,6 +10,7 @@ using Tile::Tileset;
 using Tile::Tile;
 using Calculator::calculate;
 
+// Add a tile of a random type given the numbers of each type
 void Tileset::add_random(int &nums, int &ops, int &parens, int &facts)
 {
 	bool made_tile = false;
@@ -50,6 +51,7 @@ void Tileset::add_random(int &nums, int &ops, int &parens, int &facts)
   // There's a chance it didn't make a tile. So, do it until it has!
 }
 
+// Get a random number
 TileType Tileset::random_number()
 {
 	int new_number = rand() % 10;  // 0 to 9
@@ -78,6 +80,7 @@ TileType Tileset::random_number()
 	return TileType::ZERO;	// Never reaches here, but g++ error if I don't include this
 }
 
+// Get a random operator
 TileType Tileset::random_operator()
 {
 	int new_operator = rand() % 4;	// ASMD
@@ -94,9 +97,10 @@ TileType Tileset::random_operator()
 	return TileType::PLUS;	// g++ error if not here
 }
 
+// Tileset constructor
 Tileset::Tileset(int n): num_tiles(n)
 {
-	//std::srand(std::time(0));
+	std::srand(std::time(0));
 	// Start by finding out how many of each type we will make. The rules:
 	// 1. More numbers than operators
 	// 2. At least 1 non-factorial operator
