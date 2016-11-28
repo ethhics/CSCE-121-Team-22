@@ -9,6 +9,7 @@
 #include "../include/GUI.h"
 #include "calculator.h"
 
+// A TileButton is a graphical button that represents a tile
 typedef struct
 {
 	Graph_lib::Button *button;
@@ -18,12 +19,16 @@ typedef struct
 	void move(Point xy);
 } TileButton;
 
+// A TileLocation is a point on the screen representing a location that a
+// TileButton can be
 typedef struct
 {
 	TileButton *tilebutton;
 	const Point loc;
 } TileLocation;
 
+// tile_screen is the main game window. It includes everything to run the game
+// by itself.
 class tile_screen : Graph_lib::Window
 {
 private:

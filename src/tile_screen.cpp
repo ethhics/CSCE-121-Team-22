@@ -8,11 +8,13 @@
 
 using namespace Graph_lib;
 
+// Callback used for tile buttons. Calls move_button
 void a_callback(Address own, Address pw)
 {
 	reference_to<tile_screen>(pw).move_button((void *)own);
 }
 
+// Move a button
 void TileButton::move(Point xy)
 {
 	int x = xy.x - button->loc.x;
@@ -23,26 +25,34 @@ void TileButton::move(Point xy)
 // Change the numbers in this method to change where all of the things are
 tile_screen::tile_screen(int num_tiles, Point xy, int w, int h, const string& title)
 	:Window {xy, w, h, title},
-	calculate {Point{600,450}, 150, 100, "Calculate!",
+	calculate {Point{640,480}, 160, 120, "Calculate!",
 	           [](Address, Address pw){reference_to<tile_screen>(pw).get_value();}},
 	tileset(num_tiles)
 {
+	const int tile_height = 100;
+	const int tile_width = 75;
+	const int start_x = 50;
+	const int top_y = 100;
+	const int bottom_y = 400;
 	int i = 0;
 	for (Tile::Tile *t : tileset.getTiles()) {
-		string s(1, t->getValue());
-		Point loc {100+100*i, 100};
+		string s(1, t->getValue());  // Get the tile's value
+		// Make a location on the top line for the tile
+		Point loc {start_x+tile_width*i, top_y};
 		TileButton *tb = new TileButton {nullptr, true, loc};
-		Graph_lib::Button *b = new Graph_lib::Button(loc, 100, 150, s, a_callback);
+		Graph_lib::Button *b = new Graph_lib::Button(loc, tile_width, tile_height, s, a_callback);
 		attach(*b);
 		tb->button = b;
 		buttons.push_back(tb);
-		TileLocation *tl = new TileLocation {nullptr, Point{100+100*i, 400}};
+		// Make a bottom location as well
+		TileLocation *tl = new TileLocation {nullptr, Point{start_x+tile_width*i, bottom_y}};
 		locations.push_back(tl);
 		i++;
 	}
 	attach(calculate);
 }
 
+// Push all tiles to the left
 void tile_screen::pushTilesLeft()
 {
 	// Go through each of the locations from left to right
@@ -58,7 +68,6 @@ void tile_screen::pushTilesLeft()
 					tl_next->tilebutton = nullptr;
 
 					tl->tilebutton->move(tl->loc);
-
 					break;
 				}
 			}
@@ -66,9 +75,10 @@ void tile_screen::pushTilesLeft()
 	}
 }
 
+// Move a button to a location
 void tile_screen::move_button(void *pointer)
 {
-	// This is pretty jank, but it works.
+	// This is pretty bad practice, but it works.
 	// Buttons have callback functions attached to them, and they have only 2
 	// parameters: a pointer to the window, and a pointer to something else. It
 	// turns out, the second pointer is different for all of the buttons.
@@ -95,6 +105,7 @@ void tile_screen::move_button(void *pointer)
 	pushTilesLeft();
 }
 
+// Check if any tiles are still on the top row
 bool tile_screen::tiles_on_top()
 {
 	for (TileButton *tb : buttons) {
@@ -105,6 +116,7 @@ bool tile_screen::tiles_on_top()
 	return false;
 }
 
+// Get a string representation of the tiles on bottom
 string tile_screen::get_string()
 {
 	std::stringstream ss;
@@ -115,6 +127,7 @@ string tile_screen::get_string()
 	return ss.str();
 }
 
+// Get the value of the tiles on bottom
 void tile_screen::get_value()
 {
 	// Check that there aren't any tiles left in the top row. (Don't do
@@ -130,6 +143,6 @@ void tile_screen::get_value()
 int main()
 {
 	// The first number is the number of tiles, this is where input goes
-	tile_screen window {5, Point{100,100}, 800, 600, "Tiles"};
+	tile_screen window {7, Point{100,100}, 800, 600, "Tiles"};
 	return gui_main();
 }
