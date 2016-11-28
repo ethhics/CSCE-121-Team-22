@@ -1,8 +1,8 @@
-#include "Simple_window.h"
-#include "std_lib_facilities_4.h"
-#include "Graph.h"
-#include "GUI.h"
-#include "Window.h"
+#include "../include/Simple_window.h"
+#include "../include/std_lib_facilities_4.h"
+#include "../include/Graph.h"
+#include "../include/GUI.h"
+#include "../include/Window.h"
 
 struct List{
 	int place;
@@ -60,7 +60,7 @@ highscore7{Point{225,315},150,50,"Highscore, Difficulty: 7",
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 3"};
 		
-		ifstream ist{"highscore3.txt"};
+		ifstream ist{"data/highscore3.txt"};
 		if(!ist)error("cant open");
 
 		vector<List>highscore;
@@ -112,7 +112,7 @@ ist.close();
 	void highscore_window::high4()
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 4"};
-		ifstream ist{"highscore4.txt"};
+		ifstream ist{"data/highscore4.txt"};
 		if(!ist)error("cant open");
 
 		vector<List>highscore;
@@ -163,7 +163,7 @@ ist.close();
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 5"};
 		
-		ifstream ist{"highscore5.txt"};
+		ifstream ist{"data/highscore5.txt"};
 		if(!ist)error("cant open");
 
 		vector<List>highscore;
@@ -214,7 +214,7 @@ ist.close();
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 6"};
 		
-		ifstream ist{"highscore6.txt"};
+		ifstream ist{"data/highscore6.txt"};
 		if(!ist)error("cant open");
 
 		vector<List>highscore;
@@ -265,7 +265,7 @@ ist.close();
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 7"};
 		
-		ifstream ist{"highscore7.txt"};
+		ifstream ist{"data/highscore7.txt"};
 		if(!ist)error("cant open");
 
 		vector<List>highscore;
