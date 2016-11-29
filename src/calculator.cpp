@@ -9,6 +9,9 @@
 using Calculator::Token;
 using Calculator::Token_stream;
 
+// TODO: Make non-global
+int open_parens = 0;
+
 // The constructor just sets full to indicate that the buffer is empty:
 Token_stream::Token_stream()
 	:full(false), buffer(0) { }    // no Token in buffer
@@ -63,8 +66,10 @@ double Calculator::primary() {
 	switch (t.kind) {
 	case '(':	 // handle '(' expression ')'
 		{  // In braces because d is needed only for this case
+			open_parens++;
 			double d = expression();
 			t = ts.get();
+			open_parens--;
 			if (t.kind != ')') throw std::exception();
 			return d;
 		}
@@ -154,7 +159,7 @@ double Calculator::expression()
 			break;
 		default:
 			if (t.kind != '=') ts.putback(t);  // put t back into the token stream
-			if (t.kind == ')') throw std::exception();
+			if (open_parens == 0 && t.kind == ')') throw std::exception();
 			return left;       // finally: no more + or -: return the answer
 		}
 	}
