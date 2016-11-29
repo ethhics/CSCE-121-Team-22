@@ -16,11 +16,13 @@ add_executable(tile_test test/tile_tests.cpp)
 target_link_libraries(tile_test ourlib)
 add_executable(calculator_test test/calculator_tests.cpp)
 target_link_libraries(calculator_test ourlib)
+add_executable(highscore_test test/highscore_tests.cpp)
+target_link_libraries(highscore_test ${LIBS})
 
 # Windows
-add_executable(highscore_test highscore_window.cpp)
+add_executable(highscorescreen_test highscore_window.cpp)
 add_executable(tilescreen_test tile_screen.cpp)
 
-target_link_libraries(highscore_test ${LIBS})
+target_link_libraries(highscorescreen_test ${LIBS})
 target_link_libraries(tilescreen_test ${LIBS} ourlib)
 

@@ -1,4 +1,4 @@
-#include "std_lib_facilities_4.h"
+#include "../../include/std_lib_facilities_4.h"
 
 struct List{
 	int place;
@@ -8,7 +8,7 @@ struct List{
 
 int main(){
 	
-ifstream ist{"highscore.txt"};
+ifstream ist{"data/highscore_test.txt"};
 if(!ist)error("cant open");
 
 vector<List>highscore;
@@ -63,7 +63,7 @@ else{
 }
 
 
-ofstream ost{"highscore.txt"};
+ofstream ost{"data/highscore_test.txt"};
 ost.trunc;
 
 
