@@ -7,10 +7,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include <sstream>
-#include <string>
-#include <cmath>
-#include <iostream>
+#include "defs.h"
 
 namespace Calculator {
 
@@ -38,13 +35,13 @@ private:
 };
 
 static Token_stream ts;         // provides get() and putback()
-static std::stringstream c_in;
+static stringstream c_in;
 
 double expression();
 double primary();
 double term();
 
-double calculate(std::string);
+double calculate(string);
 
 }  // end namespace Calculator
 

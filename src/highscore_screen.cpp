@@ -1,50 +1,23 @@
-#include "../include/Simple_window.h"
-#include "../include/std_lib_facilities_4.h"
-#include "../include/Graph.h"
-#include "../include/GUI.h"
-#include "../include/Window.h"
+#include "defs.h"
+#include "highscore_screen.h"
 
-struct List{
-	int place;
-	string name;
-	int score;
-};
-
-
-struct highscore_window : Graph_lib::Window{
-	highscore_window(Point xy, int w, int h, const string& title);
-
-private:
-	Button highscore3;
-	void high3();
-	Button highscore4;
-	void high4();
-	Button highscore5;
-	void high5();
-	Button highscore6;
-	void high6();
-	Button highscore7;
-	void high7();
-
-};
-
-highscore_window::highscore_window(Point xy,int w,int h,const string& title)
+highscore_screen::highscore_screen(Point xy,int w,int h,const string& title)
 :Window{xy,w,h,title},
 
 highscore3{Point{225,35},150,50,"Highscore, Difficulty: 3",
-[](Address, Address pw){reference_to<highscore_window>(pw).high3();}},
+[](Address, Address pw){reference_to<highscore_screen>(pw).high3();}},
 
 highscore4{Point{225,105},150,50,"Highscore, Difficulty: 4",
-[](Address, Address pw){reference_to<highscore_window>(pw).high4();}},
+[](Address, Address pw){reference_to<highscore_screen>(pw).high4();}},
 
 highscore5{Point{225,175},150,50,"Highscore, Difficulty: 5",
-[](Address, Address pw){reference_to<highscore_window>(pw).high5();}},
+[](Address, Address pw){reference_to<highscore_screen>(pw).high5();}},
 
 highscore6{Point{225,245},150,50,"Highscore, Difficulty: 6",
-[](Address, Address pw){reference_to<highscore_window>(pw).high6();}},
+[](Address, Address pw){reference_to<highscore_screen>(pw).high6();}},
 
 highscore7{Point{225,315},150,50,"Highscore, Difficulty: 7",
-[](Address, Address pw){reference_to<highscore_window>(pw).high7();}}
+[](Address, Address pw){reference_to<highscore_screen>(pw).high7();}}
 
 
 	{
@@ -56,7 +29,7 @@ highscore7{Point{225,315},150,50,"Highscore, Difficulty: 7",
 		
 	}
 
-	void highscore_window::high3()
+	void highscore_screen::high3()
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 3"};
 		
@@ -109,7 +82,7 @@ ist.close();
 		scores.wait_for_button();
 	}
 	
-	void highscore_window::high4()
+	void highscore_screen::high4()
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 4"};
 		ifstream ist{"data/highscore4.txt"};
@@ -159,7 +132,7 @@ ist.close();
 		scores.wait_for_button();
 	}
 	
-	void highscore_window::high5()
+	void highscore_screen::high5()
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 5"};
 		
@@ -210,7 +183,7 @@ ist.close();
 		scores.wait_for_button();
 	}
 	
-	void highscore_window::high6()
+	void highscore_screen::high6()
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 6"};
 		
@@ -261,7 +234,7 @@ ist.close();
 		scores.wait_for_button();
 	}
 	
-	void highscore_window::high7()
+	void highscore_screen::high7()
 	{
 		Simple_window scores{Point{200,200},400,400,"Highscore, Difficulty: 7"};
 		
@@ -317,7 +290,7 @@ int main(){
 
 
 	
-highscore_window win{Point{400,60},600,400, "Highscores"};
+highscore_screen win{Point{400,60},600,400, "Highscores"};
 
 
 return gui_main();

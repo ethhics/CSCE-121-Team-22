@@ -165,8 +165,8 @@ double Calculator::expression()
 	}
 }
 
-double Calculator::calculate(std::string calc_in) {
-	c_in.str(std::string());
+double Calculator::calculate(string calc_in) {
+	c_in.str(string());
 	c_in.clear();
 	c_in << calc_in << "=";
 

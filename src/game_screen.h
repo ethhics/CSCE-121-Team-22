@@ -1,4 +1,4 @@
-// tile_screen.h
+// game_screen.h
 // Created: 11/16 by Zach Scott
 //
 // This file declares a window which prints a tileset on the screen.
@@ -27,9 +27,9 @@ typedef struct
 	const Point loc;
 } TileLocation;
 
-// tile_screen is the main game window. It includes everything to run the game
+// game_screen is the main game window. It includes everything to run the game
 // by itself.
-class tile_screen : Graph_lib::Window
+class game_screen : Graph_lib::Window
 {
 private:
 	Graph_lib::Button calculate;
@@ -43,7 +43,7 @@ private:
 	void pushTilesLeft();
 
 public:
-	tile_screen(int num_tiles, Point xy, int w, int h, const string& title);
+	game_screen(int num_tiles, Point xy, int w, int h, const string& title);
 	void get_value();
 	void move_button(void *i);
 };

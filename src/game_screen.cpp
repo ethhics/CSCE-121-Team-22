@@ -1,9 +1,9 @@
-// tile_screen.cpp
+// game_screen.cpp
 // Created: 11/16 by Zach Scott
 //
-// This file defines a window from tile_screen.h which prints a tileset on the screen.
+// This file defines a window from game_screen.h which prints a tileset on the screen.
 
-#include "tile_screen.h"
+#include "game_screen.h"
 #include <iostream>
 
 using namespace Graph_lib;
@@ -11,7 +11,7 @@ using namespace Graph_lib;
 // Callback used for tile buttons. Calls move_button
 void a_callback(Address own, Address pw)
 {
-	reference_to<tile_screen>(pw).move_button((void *)own);
+	reference_to<game_screen>(pw).move_button((void *)own);
 }
 
 // Move a button
@@ -23,10 +23,10 @@ void TileButton::move(Point xy)
 }
 
 // Change the numbers in this method to change where all of the things are
-tile_screen::tile_screen(int num_tiles, Point xy, int w, int h, const string& title)
+game_screen::game_screen(int num_tiles, Point xy, int w, int h, const string& title)
 	:Window {xy, w, h, title},
 	calculate {Point{640,480}, 160, 120, "Calculate!",
-	           [](Address, Address pw){reference_to<tile_screen>(pw).get_value();}},
+	           [](Address, Address pw){reference_to<game_screen>(pw).get_value();}},
 	tileset(num_tiles)
 {
 	const int tile_height = 100;
@@ -53,7 +53,7 @@ tile_screen::tile_screen(int num_tiles, Point xy, int w, int h, const string& ti
 }
 
 // Push all tiles to the left
-void tile_screen::pushTilesLeft()
+void game_screen::pushTilesLeft()
 {
 	// Go through each of the locations from left to right
 	for (unsigned int i = 0; i < locations.size(); ++i) {
@@ -76,7 +76,7 @@ void tile_screen::pushTilesLeft()
 }
 
 // Move a button to a location
-void tile_screen::move_button(void *pointer)
+void game_screen::move_button(void *pointer)
 {
 	// This is pretty bad practice, but it works.
 	// Buttons have callback functions attached to them, and they have only 2
@@ -106,7 +106,7 @@ void tile_screen::move_button(void *pointer)
 }
 
 // Check if any tiles are still on the top row
-bool tile_screen::tiles_on_top()
+bool game_screen::tiles_on_top()
 {
 	for (TileButton *tb : buttons) {
 		if (tb->on_top_row) {
@@ -117,9 +117,9 @@ bool tile_screen::tiles_on_top()
 }
 
 // Get a string representation of the tiles on bottom
-string tile_screen::get_string()
+string game_screen::get_string()
 {
-	std::stringstream ss;
+	stringstream ss;
 	for (TileLocation *tl : locations) {
 		if (tl->tilebutton == nullptr) { continue; }
 		ss << tl->tilebutton->button->label;
@@ -128,7 +128,7 @@ string tile_screen::get_string()
 }
 
 // Get the value of the tiles on bottom
-void tile_screen::get_value()
+void game_screen::get_value()
 {
 	// Check that there aren't any tiles left in the top row. (Don't do
 	// anything? Forfeit?)
@@ -143,6 +143,6 @@ void tile_screen::get_value()
 int main()
 {
 	// The first number is the number of tiles, this is where input goes
-	tile_screen window {7, Point{100,100}, 800, 600, "Tiles"};
+	game_screen window {7, Point{100,100}, 800, 600, "Tiles"};
 	return gui_main();
 }
