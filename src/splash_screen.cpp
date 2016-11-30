@@ -1,61 +1,21 @@
-#include "Simple_window.h"
-#include "Graph.h"
-#include "std_lib_facilities_4.h"
-#include "GUI.h"
-using namespace Graph_lib;
- 
-struct Lines_window : Graph_lib::Window {
-          Lines_window(Point xy, int w, int h, const string& title);
-          Open_polyline lines;
-private:
- //First screen for the most part.
-		  Image bg;
-		  Image banner;
-		  Rectangle start;
-		  Rectangle qquit;
-		  Text go;
-		  Text end;
-		  Text numb;
-		  Text memb;
-		  Text name1;
-		  Text name2;
-		  Text name3;
-		  Text game_name;
-		  Text assistance;
-// Second screen for the most part.		  
-		  Rectangle bg2;
-		  Text rules1;
-		  Text rules2;
-		  Text rules3;
-		  Text rules4;
-		  Text rules5;
-		  Text rules6;
-		  Text rules7;
-		  Text rules8;
-		  Text rules9;
-		  Text rules10;
-		  
-		  
-		  
-		  Button toggle_button;          // add (next_x,next_y) to lines
-          Button quit_button;		  		  
-		  Button actual_start_button;
-
-          void toggle();
-          void quit();
-		  void actual_start();
-};
+#include "../include/std_lib_facilities_4.h"
+#include "splash_screen.h"
 
 Lines_window::Lines_window(Point xy, int w, int h, const string& title)
           :	Graph_lib::Window{xy,w,h,title},
-		  bg{Point(0,0),"faketiles.jpg"},
-		  banner{Point(100,0),"banner.gif"},
+		  bg{Point(0,0),"data/faketiles.jpg"},
+		  banner{Point(100,0),"data/banner.gif"},
+		  start{Point(305,347), 88, 16},
+		  qquit{Point{x_max() - 30,0}, 30, 16},
+		  go{Point(310,360), "Start Game! "},
+		  end{Point(x_max() - 29, 13), "Quit"},
 		  numb(Point(20,120), "Team Number 22 "),
-		  memb(Point(20,140), "Team Members: "),
-		  name1(Point(20,160), "Joseph Rangel "),
-		  name2(Point(20,180), "Michael Schmaus "),
-		  name3(Point(20,200), "Zachary Scott "),
-		  game_name(Point(220,98), "Digit Figit"),
+		  memb(Point(20,150), "Team Members: "),
+		  name1(Point(20,170), "Joseph Rangel "),
+		  name2(Point(20,190), "Michael Schmaus "),
+		  name3(Point(20,210), "Zachary Scott "),
+		  game_name(Point(290,120), "Digit Figit"),
+		  assistance(Point(270,345), "Press start game to start"),
 		  bg2(Point(0,0), 600, 400),
 		  rules1(Point(30,40), "Rules:"),
 		  rules2(Point(30,75), "Click on the tile you wish to play."),
@@ -67,21 +27,6 @@ Lines_window::Lines_window(Point xy, int w, int h, const string& title)
 		  rules8(Point(30,285), "to get the highest score."),
 		  rules9(Point(30,320), "Press start game and good luck!"),
 		  rules10(Point(310,360), "Start Game! "),
-		  assistance(Point(270,345), "Press start game to start"),
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  start{Point(305,347), 88, 16},
-		  qquit{Point{x_max() - 30,0}, 30, 16},
-		  go{Point(310,360), "Start Game! "},
-		  end{Point(x_max() - 29, 13), "Quit"},
 		  toggle_button{Point{305,347}, 88, 16, "Start Game",
 		  [](Address, Address pw) {reference_to<Lines_window>(pw).toggle();}},
           quit_button{Point{x_max() - 30,0}, 30, 20, "Quit",
@@ -174,12 +119,6 @@ void Lines_window::toggle()
 		  attach(qquit);		  
 		  attach(end);		  
 		  attach(actual_start_button);
-		  
-		  
-		  
-		  
-		  
-		  
 		  redraw();
 //		  if (out.fill_color().as_int() == Graph_lib::Color::white){
 //			out.set_fill_color(Graph_lib::Color::black);
@@ -197,7 +136,7 @@ void Lines_window::actual_start()
 
 int main()
 try {
-          Lines_window win {Point{100,100},600,400,"lightbulb"};
+          Lines_window win {Point{100,100},800,600,"Digit Fidgit"};
           return gui_main();
 }
 catch(exception& e) {

@@ -22,7 +22,9 @@ target_link_libraries(highscore_test ${LIBS})
 # Windows
 add_executable(highscorescreen_test highscore_window.cpp)
 add_executable(tilescreen_test tile_screen.cpp)
+add_executable(splashscreen_test splash_screen.cpp)
 
 target_link_libraries(highscorescreen_test ${LIBS})
 target_link_libraries(tilescreen_test ${LIBS} ourlib)
+target_link_libraries(splashscreen_test ${LIBS})
 
