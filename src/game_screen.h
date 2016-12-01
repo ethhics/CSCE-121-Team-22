@@ -3,11 +3,11 @@
 //
 // This file declares a window which prints a tileset on the screen.
 
-#include <vector>
-#include <sstream>
-#include "tile.h"
-#include "../include/GUI.h"
-#include "calculator.h"
+#ifndef GAME_H
+#define GAME_H
+
+#include "defs.h"
+#include "windows.h"
 
 // A TileButton is a graphical button that represents a tile
 typedef struct
@@ -37,13 +37,16 @@ private:
 	Tile::Tileset tileset;
 	vector<TileButton*> buttons;
 	vector<TileLocation*> locations;
+	double& score;
 
 	string get_string();
 	bool tiles_on_top();
 	void pushTilesLeft();
 
 public:
-	game_screen(int num_tiles, Point xy, int w, int h, const string& title);
+	game_screen(int num_tiles, Point xy, int w, int h, const string& title, double& score);
 	void get_value();
 	void move_button(void *i);
 };
+
+#endif

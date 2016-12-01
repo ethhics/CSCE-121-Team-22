@@ -1,4 +1,8 @@
+#ifndef HIGHSCORE_H
+#define HIGHSCORE_H
+
 #include "defs.h"
+#include "windows.h"
 
 struct List{
 	int place;
@@ -8,7 +12,7 @@ struct List{
 
 
 struct highscore_screen : Graph_lib::Window{
-	highscore_screen(Point xy, int w, int h, const string& title);
+	highscore_screen(Point xy, int w, int h, const string& title, int& difficulty);
 
 private:
 	Button highscore3;
@@ -21,6 +25,7 @@ private:
 	void high6();
 	Button highscore7;
 	void high7();
-
+	int& diff;
 };
 
+#endif

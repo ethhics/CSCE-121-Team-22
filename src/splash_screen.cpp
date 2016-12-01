@@ -1,7 +1,7 @@
 #include "../include/std_lib_facilities_4.h"
 #include "splash_screen.h"
 
-splash_screen::splash_screen(Point xy, int w, int h, const string& title)
+splash_screen::splash_screen(Point xy, int w, int h, const string& title, string& name)
           :	Graph_lib::Window{xy,w,h,title},
 		  bg{Point(0,0),"data/faketiles.jpg"},
 		  banner{Point(100,0),"data/banner.gif"},
@@ -32,7 +32,8 @@ splash_screen::splash_screen(Point xy, int w, int h, const string& title)
           quit_button{Point{x_max() - 30,0}, 30, 20, "Quit",
 		  [](Address, Address pw) {reference_to<splash_screen>(pw).quit();}},
 		  actual_start_button{Point{305,347}, 88, 16, "Start Game",
-		  [](Address, Address pw) {reference_to<splash_screen>(pw).actual_start();}}
+		  [](Address, Address pw) {reference_to<splash_screen>(pw).actual_start();}},
+		  initials{name}
 {
           attach(bg);
 		  attach(banner);
@@ -131,19 +132,6 @@ void splash_screen::toggle()
 
 void splash_screen::actual_start()
 {
+          initials = "ABC";
           hide();          // curious FLTK idiom to delete window
-}
-
-int main()
-try {
-          splash_screen win {Point{100,100},800,600,"Digit Fidgit"};
-          return gui_main();
-}
-catch(exception& e) {
-          cerr << "exception: " << e.what() << '\n';
-          return 1;
-}
-catch (...) {
-          cerr << "Some exception\n";
-          return 2;
 }

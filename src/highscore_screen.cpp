@@ -1,7 +1,7 @@
 #include "defs.h"
 #include "highscore_screen.h"
 
-highscore_screen::highscore_screen(Point xy,int w,int h,const string& title)
+highscore_screen::highscore_screen(Point xy,int w,int h,const string& title, int& difficulty)
 :Window{xy,w,h,title},
 
 highscore3{Point{225,35},150,50,"Highscore, Difficulty: 3",
@@ -17,10 +17,12 @@ highscore6{Point{225,245},150,50,"Highscore, Difficulty: 6",
 [](Address, Address pw){reference_to<highscore_screen>(pw).high6();}},
 
 highscore7{Point{225,315},150,50,"Highscore, Difficulty: 7",
-[](Address, Address pw){reference_to<highscore_screen>(pw).high7();}}
+[](Address, Address pw){reference_to<highscore_screen>(pw).high7();}},
 
+diff{difficulty}
 
 	{
+		difficulty = 3;
 		attach(highscore3);
 		attach(highscore4);
 		attach(highscore5);
@@ -284,17 +286,3 @@ ist.close();
 		
 		scores.wait_for_button();
 	}
-	
-	
-int main(){
-
-
-	
-highscore_screen win{Point{400,60},600,400, "Highscores"};
-
-
-return gui_main();
-
-return 0;
-
-}

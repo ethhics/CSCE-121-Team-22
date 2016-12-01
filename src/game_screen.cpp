@@ -23,11 +23,12 @@ void TileButton::move(Point xy)
 }
 
 // Change the numbers in this method to change where all of the things are
-game_screen::game_screen(int num_tiles, Point xy, int w, int h, const string& title)
+game_screen::game_screen(int num_tiles, Point xy, int w, int h, const string& title, double& score)
 	:Window {xy, w, h, title},
 	calculate {Point{640,480}, 160, 120, "Calculate!",
 	           [](Address, Address pw){reference_to<game_screen>(pw).get_value();}},
-	tileset(num_tiles)
+	tileset(num_tiles),
+	score{score}
 {
 	const int tile_height = 100;
 	const int tile_width = 75;
@@ -137,12 +138,6 @@ void game_screen::get_value()
 		return;
 	}
 	// Now, just print out the value of the bottom row
-	std::cout << "Value: " << Calculator::calculate(get_string()) << std::endl;
-}
-
-int main()
-{
-	// The first number is the number of tiles, this is where input goes
-	game_screen window {7, Point{100,100}, 800, 600, "Tiles"};
-	return gui_main();
+	score = Calculator::calculate(get_string());
+	hide();
 }
