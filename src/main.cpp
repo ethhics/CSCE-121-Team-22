@@ -2,6 +2,7 @@
 #include "splash_screen.h"
 #include "highscore_screen.h"
 #include "game_screen.h"
+#include "initials_screen.h"
 
 int main()
 {
@@ -14,7 +15,8 @@ int main()
 	gui_main();
 	game_screen g {difficulty, Point{100,100}, 800, 600, "Game", score};
 	gui_main();
-	// update_scores(difficulty, name, score);
-	/* Make the final high score screen and return gui_main(); */
+	name = get_initials();
+	score_sorter(score, name, difficulty);
+	get_scores(difficulty);
 	return 0;
 }

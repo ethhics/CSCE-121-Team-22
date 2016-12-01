@@ -1,11 +1,6 @@
-#include "Simple_window.h"
-#include "std_lib_facilities_4.h"
-#include "Graph.h"
-#include "GUI.h"
-#include "Window.h"
-
-
-int main(){
+#include "defs.h"
+#include "windows.h"
+string get_initials(){
 	string nam;
 	
 		while(nam.size()<3){
@@ -24,10 +19,5 @@ int main(){
 	 
 	nam= initials.get_string().substr(0,3);
 		}
-		
-	
-		
+    return nam;
 }
-	
-	
-	
