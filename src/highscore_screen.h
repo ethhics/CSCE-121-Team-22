@@ -25,6 +25,16 @@ private:
 	void high6();
 	Button highscore7;
 	void high7();
+	Button game3;
+	void gamefun3();
+	Button game4;
+	void gamefun4();
+	Button game5;
+	void gamefun5();
+	Button game6;
+	void gamefun6();
+	Button game7;
+	void gamefun7(); 
 	int& diff;
 };
 

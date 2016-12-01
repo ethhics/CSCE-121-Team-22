@@ -4,20 +4,35 @@
 highscore_screen::highscore_screen(Point xy,int w,int h,const string& title, int& difficulty)
 :Window{xy,w,h,title},
 
-highscore3{Point{225,35},150,50,"Highscore, Difficulty: 3",
+highscore3{Point{375,35},150,50,"Highscore, Difficulty: 3",
 [](Address, Address pw){reference_to<highscore_screen>(pw).high3();}},
 
-highscore4{Point{225,105},150,50,"Highscore, Difficulty: 4",
+highscore4{Point{375,105},150,50,"Highscore, Difficulty: 4",
 [](Address, Address pw){reference_to<highscore_screen>(pw).high4();}},
 
-highscore5{Point{225,175},150,50,"Highscore, Difficulty: 5",
+highscore5{Point{375,175},150,50,"Highscore, Difficulty: 5",
 [](Address, Address pw){reference_to<highscore_screen>(pw).high5();}},
 
-highscore6{Point{225,245},150,50,"Highscore, Difficulty: 6",
+highscore6{Point{375,245},150,50,"Highscore, Difficulty: 6",
 [](Address, Address pw){reference_to<highscore_screen>(pw).high6();}},
 
-highscore7{Point{225,315},150,50,"Highscore, Difficulty: 7",
+highscore7{Point{375,315},150,50,"Highscore, Difficulty: 7",
 [](Address, Address pw){reference_to<highscore_screen>(pw).high7();}},
+
+game3{Point{50,35},150,50,"Game, Difficulty: 3",
+[](Address, Address pw){reference_to<highscore_screen>(pw).gamefun3();}},
+
+game4{Point{50,105},150,50,"Game, Difficulty: 4",
+[](Address, Address pw){reference_to<highscore_screen>(pw).gamefun4();}},
+
+game5{Point{50,175},150,50,"Game, Difficulty: 5",
+[](Address, Address pw){reference_to<highscore_screen>(pw).gamefun5();}},
+
+game6{Point{50,245},150,50,"Game, Difficulty: 6",
+[](Address, Address pw){reference_to<highscore_screen>(pw).gamefun6();}},
+
+game7{Point{50,315},150,50,"Game, Difficulty: 7",
+[](Address, Address pw){reference_to<highscore_screen>(pw).gamefun7();}},
 
 diff{difficulty}
 
@@ -28,7 +43,11 @@ diff{difficulty}
 		attach(highscore5);
 		attach(highscore6);
 		attach(highscore7);
-		
+		attach(game3);
+		attach(game4);
+		attach(game5);
+		attach(game6);
+		attach(game7);
 	}
 
 	void highscore_screen::high3()
@@ -285,4 +304,29 @@ ist.close();
 		scores.attach(fifth);
 		
 		scores.wait_for_button();
+	}
+	
+	void highscore_screen::gamefun3(){
+		diff = 3;
+		this->hide();
+	}
+	
+	void highscore_screen::gamefun4(){
+		diff = 4;
+		this->hide();
+	}
+	
+	void highscore_screen::gamefun5(){
+		diff = 5;
+		this->hide();
+	}
+	
+	void highscore_screen::gamefun6(){
+		diff = 6;
+		this->hide();
+	}
+	
+	void highscore_screen::gamefun7(){
+		diff = 7;
+		this->hide();
 	}
