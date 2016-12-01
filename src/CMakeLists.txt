@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 project (PROJECT)
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "-g -std=c++17 -Wall -Wextra -pedantic")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../bin)
 
 find_package(FLTK)

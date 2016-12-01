@@ -46,6 +46,7 @@ void TileButton::add_image(const string& s)
         p = new Bad_image(width, height);    // the "error image"
     }
 	pw->image(p);
+	pw->draw_label(loc.x, loc.y, 0, 0, FL_ALIGN_CENTER);
 	show();
 }
 
@@ -70,7 +71,7 @@ game_screen::game_screen(int num_tiles, Point xy, int w, int h, const string& ti
 		TileButton *tb = new TileButton(loc, tile_width, tile_height, s, a_callback);
 		tb->add_tile(t);
 		attach(*tb);
-		tb->add_image("data/"+to_string(t->getName())+".jpg");
+		tb->add_image("data/"+to_string(t->getName())+".gif");
 		buttons.push_back(tb);
 		// Make a bottom location as well
 		TileLocation *tl = new TileLocation {nullptr, Point{start_x+tile_width*i, bottom_y}};
