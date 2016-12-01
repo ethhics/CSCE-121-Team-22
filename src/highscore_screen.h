@@ -9,7 +9,8 @@ struct List{
 	string name;
 	int score;
 };
-
+void get_scores(int difficulty);
+void score_sorter(int score, string name, int difficulty);
 
 struct highscore_screen : Graph_lib::Window{
 	highscore_screen(Point xy, int w, int h, const string& title, int& difficulty);
