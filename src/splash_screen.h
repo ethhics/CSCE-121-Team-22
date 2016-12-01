@@ -1,11 +1,12 @@
-#include "../include/Simple_window.h"
-#include "../include/Graph.h"
-#include "../include/std_lib_facilities_4.h"
-#include "../include/GUI.h"
+#ifndef SPLASH_H
+#define SPLASH_H
+
+#include "defs.h"
+#include "windows.h"
 using namespace Graph_lib;
  
-struct Lines_window : Graph_lib::Window {
-          Lines_window(Point xy, int w, int h, const string& title);
+struct splash_screen : Graph_lib::Window {
+          splash_screen(Point xy, int w, int h, const string& title, string& name);
           Open_polyline lines;
 private:
  //First screen for the most part.
@@ -44,4 +45,9 @@ private:
           void toggle();
           void quit();
 		  void actual_start();
+
+		  string& initials;
+
 };
+
+#endif

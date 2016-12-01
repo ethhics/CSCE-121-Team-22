@@ -10,6 +10,47 @@ using Tile::Tileset;
 using Tile::Tile;
 using Calculator::calculate;
 
+string Tile::Tile::getName()
+{
+	switch (type) {
+	case TileType::ZERO:
+		return "zero";
+	case TileType::ONE:
+		return "one";
+	case TileType::TWO:
+		return "two";
+	case TileType::THREE:
+		return "three";
+	case TileType::FOUR:
+		return "four";
+	case TileType::FIVE:
+		return "five";
+	case TileType::SIX:
+		return "six";
+	case TileType::SEVEN:
+		return "seven";
+	case TileType::EIGHT:
+		return "eight";
+	case TileType::NINE:
+		return "nine";
+	case TileType::PLUS:
+		return "plus";
+	case TileType::MINUS:
+		return "minus";
+	case TileType::MULTIPLY:
+		return "multiply";
+	case TileType::DIVIDE:
+		return "divide";
+	case TileType::FACTORIAL:
+		return "factorial";
+	case TileType::LPAREN:
+		return "lparen";
+	case TileType::RPAREN:
+		return "rparen";
+	}
+	return "faketile";
+}
+
 // Add a tile of a random type given the numbers of each type
 void Tileset::add_random(int &nums, int &ops, int &parens, int &facts)
 {
@@ -141,8 +182,8 @@ void Tileset::swap_tiles(Tile &t1, Tile &t2) {
 	// swap_tiles(Tile,Tile) swaps the order of two Tiles
 	// First the vector is searched for the location of t1. Then, it is searched
 	// for t2. Finally, t1 is replaced in the vector by t2, and t2 by t1.
-	std::vector<Tile *>::iterator tile1_location = tiles.begin();
-	std::vector<Tile *>::iterator tile2_location = tiles.begin();
+	vector<Tile *>::iterator tile1_location = tiles.begin();
+	vector<Tile *>::iterator tile2_location = tiles.begin();
 	for (; tile1_location != tiles.end(); ++tile1_location) {
 		if ((*tile1_location)->getUID() == t1.getUID()) {  // UIDs define equality
 			break;	// We know where the tile is! Keep the iterator where it is
@@ -160,11 +201,11 @@ void Tileset::swap_tiles(Tile &t1, Tile &t2) {
 	std::iter_swap(tile1_location, tile2_location);
 }
 
-std::string Tileset::getValueString() {
+string Tileset::getValueString() {
 	// getValueString() returns a string of all tile values in order
 	// A stringstream is created, and the tiles are iterated through, and their
 	// types are appended to the stringstream in order. Then return the string.
-	std::stringstream tileset_value;
+	stringstream tileset_value;
 	for (Tile *t : tiles) {
 		tileset_value << t->getValue();
 	}

@@ -7,11 +7,7 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include <string>
-#include <vector>
-#include <sstream>
-#include <ctime>
-#include "calculator.h"
+#include "defs.h"
 
 namespace Tile {
 
@@ -53,6 +49,7 @@ public:
 	TileType getType() { return type; }
 	char getValue() { return static_cast<char>(type); }
 	int getUID() { return UID; }
+	string getName();
 };	// end Tile::Tile
 
 class Tileset {
@@ -65,16 +62,16 @@ class Tileset {
 	// getValueString() returns a string of all tile values in order
 	// getValueDouble() returns getValueString() passed to the calculator
 private:
-	std::vector<Tile *> tiles;
+	vector<Tile *> tiles;
 	int num_tiles;
 	void add_random(int&, int&, int&, int&);
 	TileType random_number();
 	TileType random_operator();
 public:
 	Tileset(int n);
-	std::vector<Tile *> getTiles() { return tiles; }
+	vector<Tile *> getTiles() { return tiles; }
 	void swap_tiles(Tile &, Tile &);
-	std::string getValueString();
+	string getValueString();
 	double getValueDouble();
 };	// end Tile::Tileset
 

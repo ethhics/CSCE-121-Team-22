@@ -1,7 +1,7 @@
 #include "../include/std_lib_facilities_4.h"
 #include "splash_screen.h"
 
-Lines_window::Lines_window(Point xy, int w, int h, const string& title)
+splash_screen::splash_screen(Point xy, int w, int h, const string& title, string& name)
           :	Graph_lib::Window{xy,w,h,title},
 		  bg{Point(0,0),"data/faketiles.jpg"},
 		  banner{Point(100,0),"data/banner.gif"},
@@ -28,11 +28,12 @@ Lines_window::Lines_window(Point xy, int w, int h, const string& title)
 		  rules9(Point(30,320), "Press start game and good luck!"),
 		  rules10(Point(310,360), "Start Game! "),
 		  toggle_button{Point{305,347}, 88, 16, "Start Game",
-		  [](Address, Address pw) {reference_to<Lines_window>(pw).toggle();}},
+		  [](Address, Address pw) {reference_to<splash_screen>(pw).toggle();}},
           quit_button{Point{x_max() - 30,0}, 30, 20, "Quit",
-		  [](Address, Address pw) {reference_to<Lines_window>(pw).quit();}},
+		  [](Address, Address pw) {reference_to<splash_screen>(pw).quit();}},
 		  actual_start_button{Point{305,347}, 88, 16, "Start Game",
-		  [](Address, Address pw) {reference_to<Lines_window>(pw).actual_start();}}
+		  [](Address, Address pw) {reference_to<splash_screen>(pw).actual_start();}},
+		  initials{name}
 {
           attach(bg);
 		  attach(banner);
@@ -64,12 +65,12 @@ Lines_window::Lines_window(Point xy, int w, int h, const string& title)
 
 
 
-void Lines_window::quit()
+void splash_screen::quit()
 {
           hide();          // curious FLTK idiom to delete window
 }
 
-void Lines_window::toggle()
+void splash_screen::toggle()
 {
 		  detach(banner);
 		  detach(bg);
@@ -129,21 +130,8 @@ void Lines_window::toggle()
 //		  hide();
 }
 
-void Lines_window::actual_start()
+void splash_screen::actual_start()
 {
+          initials = "ABC";
           hide();          // curious FLTK idiom to delete window
-}
-
-int main()
-try {
-          Lines_window win {Point{100,100},800,600,"Digit Fidgit"};
-          return gui_main();
-}
-catch(exception& e) {
-          cerr << "exception: " << e.what() << '\n';
-          return 1;
-}
-catch (...) {
-          cerr << "Some exception\n";
-          return 2;
 }
