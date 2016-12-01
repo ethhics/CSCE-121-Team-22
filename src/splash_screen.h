@@ -6,7 +6,7 @@
 using namespace Graph_lib;
  
 struct splash_screen : Graph_lib::Window {
-          splash_screen(Point xy, int w, int h, const string& title, string& name);
+          splash_screen(Point xy, int w, int h, const string& title);
           Open_polyline lines;
 private:
  //First screen for the most part.
@@ -46,7 +46,6 @@ private:
           void quit();
 		  void actual_start();
 
-		  string& initials;
 
 };
 

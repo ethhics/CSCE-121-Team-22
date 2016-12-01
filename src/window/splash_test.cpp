@@ -3,8 +3,7 @@
 
 int main()
 try {
-          string name;
-          splash_screen win {Point{100,100},800,600,"Digit Fidgit",name};
+          splash_screen win {Point{100,100},800,600,"Digit Fidgit"};
           return gui_main();
 }
 catch(exception& e) {
