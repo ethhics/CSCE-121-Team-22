@@ -8,6 +8,19 @@
 
 using namespace Graph_lib;
 
+// Special draw method for tiles that doesn't show text
+void notext_draw(const Fl_Label *l, int x, int y, int w, int h, Fl_Align a)
+{
+	l->image->draw(x, y, w, h);
+}
+
+// Special measure method for width and height for some reason
+void notext_measure(const Fl_Label *l, int &w, int &h)
+{
+	w = l->image->w();
+	h = l->image->h();
+}
+
 // Callback used for tile buttons. Calls move_button
 void a_callback(Address own, Address pw)
 {
@@ -46,7 +59,8 @@ void TileButton::add_image(const string& s)
         p = new Bad_image(width, height);    // the "error image"
     }
 	pw->image(p);
-	pw->draw_label(loc.x, loc.y, 0, 0, FL_ALIGN_CENTER);
+	pw->labelsize(0);
+	pw->labeltype(FL_FREE_LABELTYPE); // Use the special notext type
 	show();
 }
 
@@ -58,6 +72,7 @@ game_screen::game_screen(int num_tiles, Point xy, int w, int h, const string& ti
 	tileset(num_tiles),
 	score{score}
 {
+	Fl::set_labeltype(FL_FREE_LABELTYPE, notext_draw, notext_measure);
 	const int tile_height = 100;
 	const int tile_width = 75;
 	const int start_x = 50;
