@@ -3,8 +3,8 @@
 //
 // This file defines a window from game_screen.h which prints a tileset on the screen.
 
+#include "defs.h"
 #include "game_screen.h"
-#include <iostream>
 
 using namespace Graph_lib;
 
@@ -15,11 +15,38 @@ void a_callback(Address own, Address pw)
 }
 
 // Move a button
-void TileButton::move(Point xy)
+void TileButton::move_to(const Point& xy)
 {
-	int x = xy.x - button->loc.x;
-	int y = xy.y - button->loc.y;
-	button->move(x, y);
+	hide();
+	pw->position(xy.x, xy.y);
+	show();
+}
+
+void TileButton::add_image(const string& s)
+{
+	hide();
+	Fl_Image *p;
+	ifstream ff(s.c_str());
+    if (!bool(ff)) {    // can we open s?
+        p = new Graph_lib::Bad_image(width, height);    // the "error image"
+		pw->image(p);
+        return;
+    }
+
+	Graph_lib::Suffix::Encoding e = Graph_lib::get_encoding(s);
+
+    switch(e) {        // check if it is a known encoding
+    case Suffix::jpg:
+        p = new Fl_JPEG_Image(s.c_str());
+        break;
+    case Suffix::gif:
+        p = new Fl_GIF_Image(s.c_str());
+        break;
+    default:    // Unsupported image encoding
+        p = new Bad_image(width, height);    // the "error image"
+    }
+	pw->image(p);
+	show();
 }
 
 // Change the numbers in this method to change where all of the things are
@@ -37,13 +64,13 @@ game_screen::game_screen(int num_tiles, Point xy, int w, int h, const string& ti
 	const int bottom_y = 400;
 	int i = 0;
 	for (Tile::Tile *t : tileset.getTiles()) {
-		string s(1, t->getValue());  // Get the tile's value
+		string s(to_string(t->getUID()));  // Get the tile's value
 		// Make a location on the top line for the tile
 		Point loc {start_x+tile_width*i, top_y};
-		TileButton *tb = new TileButton {nullptr, true, loc};
-		Graph_lib::Button *b = new Graph_lib::Button(loc, tile_width, tile_height, s, a_callback);
-		attach(*b);
-		tb->button = b;
+		TileButton *tb = new TileButton(loc, tile_width, tile_height, s, a_callback);
+		tb->add_tile(t);
+		attach(*tb);
+		tb->add_image("data/"+to_string(t->getName())+".jpg");
 		buttons.push_back(tb);
 		// Make a bottom location as well
 		TileLocation *tl = new TileLocation {nullptr, Point{start_x+tile_width*i, bottom_y}};
@@ -68,7 +95,7 @@ void game_screen::pushTilesLeft()
 					tl->tilebutton = tl_next->tilebutton;
 					tl_next->tilebutton = nullptr;
 
-					tl->tilebutton->move(tl->loc);
+					tl->tilebutton->move_to(tl->loc);
 					break;
 				}
 			}
@@ -79,23 +106,14 @@ void game_screen::pushTilesLeft()
 // Move a button to a location
 void game_screen::move_button(void *pointer)
 {
-	// This is pretty bad practice, but it works.
-	// Buttons have callback functions attached to them, and they have only 2
-	// parameters: a pointer to the window, and a pointer to something else. It
-	// turns out, the second pointer is different for all of the buttons.
-	// It seems like in memory it goes BUTTON1 POINTER1 BUTTON2 POINTER2, etc.
-	// And so this is hoping that pattern continues. It iterates through the
-	// button pointers and checks the memory addresses until it's less than one
-	// of them, at which point it performs on the button below it.
 	for (unsigned int i = 0; i < buttons.size(); ++i) {
 		TileButton *tb = buttons[i];
-		if ((void *)tb->button < pointer &&
-			((i == buttons.size() - 1) || ((void *)buttons[i+1]->button > pointer))) {
+		if (reference_to<Fl_Widget>(pointer).label() == tb->label) {
 			if (tb->on_top_row) {
-				tb->move(locations.back()->loc);
+				tb->move_to(locations.back()->loc);
 				locations.back()->tilebutton = tb;
 			} else {
-				tb->move(tb->loc);
+				tb->move_to(tb->loc);
 				std::for_each(locations.begin(), locations.end(),
 					[tb](TileLocation *tl){if(tl->tilebutton == tb){tl->tilebutton = nullptr;}});
 			}
@@ -123,7 +141,7 @@ string game_screen::get_string()
 	stringstream ss;
 	for (TileLocation *tl : locations) {
 		if (tl->tilebutton == nullptr) { continue; }
-		ss << tl->tilebutton->button->label;
+		ss << tl->tilebutton->tile->getValue();
 	}
 	return ss.str();
 }

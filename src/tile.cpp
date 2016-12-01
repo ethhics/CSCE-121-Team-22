@@ -10,6 +10,47 @@ using Tile::Tileset;
 using Tile::Tile;
 using Calculator::calculate;
 
+string Tile::Tile::getName()
+{
+	switch (type) {
+	case TileType::ZERO:
+		return "zero";
+	case TileType::ONE:
+		return "one";
+	case TileType::TWO:
+		return "two";
+	case TileType::THREE:
+		return "three";
+	case TileType::FOUR:
+		return "four";
+	case TileType::FIVE:
+		return "five";
+	case TileType::SIX:
+		return "six";
+	case TileType::SEVEN:
+		return "seven";
+	case TileType::EIGHT:
+		return "eight";
+	case TileType::NINE:
+		return "nine";
+	case TileType::PLUS:
+		return "plus";
+	case TileType::MINUS:
+		return "minus";
+	case TileType::MULTIPLY:
+		return "multiply";
+	case TileType::DIVIDE:
+		return "divide";
+	case TileType::FACTORIAL:
+		return "factorial";
+	case TileType::LPAREN:
+		return "lparen";
+	case TileType::RPAREN:
+		return "rparen";
+	}
+	return "faketile";
+}
+
 // Add a tile of a random type given the numbers of each type
 void Tileset::add_random(int &nums, int &ops, int &parens, int &facts)
 {

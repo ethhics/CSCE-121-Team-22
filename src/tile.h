@@ -49,6 +49,7 @@ public:
 	TileType getType() { return type; }
 	char getValue() { return static_cast<char>(type); }
 	int getUID() { return UID; }
+	string getName();
 };	// end Tile::Tile
 
 class Tileset {

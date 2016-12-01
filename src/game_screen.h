@@ -8,16 +8,25 @@
 
 #include "defs.h"
 #include "windows.h"
+#include <FL/Fl_GIF_Image.H>
+#include <FL/Fl_JPEG_Image.H>
 
-// A TileButton is a graphical button that represents a tile
-typedef struct
+struct TileButton : Graph_lib::Button
 {
-	Graph_lib::Button *button;
+	TileButton(Point xy, int w, int h, const string& label, Callback cb)
+		: Graph_lib::Button(xy,w,h,label,cb),
+		on_top_row{true},
+		loc{xy}
+	{}
+
+	void move_to(const Point &xy);
+	void add_image(const string& s);
+	void add_tile(Tile::Tile *t) { tile = t; }
+
 	bool on_top_row;
 	const Point loc;
-
-	void move(Point xy);
-} TileButton;
+	Tile::Tile *tile;
+};
 
 // A TileLocation is a point on the screen representing a location that a
 // TileButton can be

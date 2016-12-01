@@ -15,5 +15,6 @@ int main()
 	game_screen g {difficulty, Point{100,100}, 800, 600, "Game", score};
 	gui_main();
 	// Do stuff with the data
+	cout << difficulty << " " << score << endl;
 	return 0;
 }
