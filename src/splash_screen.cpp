@@ -4,34 +4,34 @@
 splash_screen::splash_screen(Point xy, int w, int h, const string& title)
           :	Graph_lib::Window{xy,w,h,title},
 		  bg{Point(0,0),"data/faketiles.jpg"},
-		  banner{Point(100,0),"data/banner.gif"},
-		  start{Point(305,347), 88, 16},
+		  banner{Point(200,0),"data/banner.gif"},
+		  start{Point(350,514), 170, 30},
 		  qquit{Point{x_max() - 30,0}, 30, 16},
-		  go{Point(310,360), "Start Game! "},
+		  go{Point(355,540), "Start Game! "},
 		  end{Point(x_max() - 29, 13), "Quit"},
-		  numb(Point(20,120), "Team Number 22 "),
-		  memb(Point(20,150), "Team Members: "),
-		  name1(Point(20,170), "Joseph Rangel "),
-		  name2(Point(20,190), "Michael Schmaus "),
-		  name3(Point(20,210), "Zachary Scott "),
-		  game_name(Point(290,120), "Digit Figit"),
-		  assistance(Point(270,345), "Press start game to start"),
-		  bg2(Point(0,0), 600, 400),
-		  rules1(Point(30,40), "Rules:"),
-		  rules2(Point(30,75), "Click on the tile you wish to play."),
-		  rules3(Point(30,110), "Organize the tiles in a manner that"),
-		  rules4(Point(30,145), "will create an acceptable opperation."),
-		  rules5(Point(30,180), "You may not use factorial (!) on"),
-		  rules6(Point(30,215), "a number higher than 9."),
-		  rules7(Point(30,250), "The goal of the game is"),
-		  rules8(Point(30,285), "to get the highest score."),
-		  rules9(Point(30,320), "Press start game and good luck!"),
-		  rules10(Point(310,360), "Start Game! "),
-		  toggle_button{Point{305,347}, 88, 16, "Start Game",
+		  numb(Point(20,160), "Team Number 22 "),
+		  memb(Point(20,190), "Team Members: "),
+		  name1(Point(20,210), "Joseph Rangel "),
+		  name2(Point(20,230), "Michael Schmaus "),
+		  name3(Point(20,250), "Zachary Scott "),
+		  game_name(Point(320,100), "Digit Figit"),
+		  assistance(Point(320,495), "Press start game to start"),
+		  bg2(Point(0,0), 800, 600),
+		  rules1(Point(30,60), "Rules:"),
+		  rules2(Point(30,105), "Click on the tile you wish to play."),
+		  rules3(Point(30,150), "Organize the tiles in a manner that"),
+		  rules4(Point(30,195), "will create an acceptable opperation."),
+		  rules5(Point(30,240), "You may not use factorial (!) on"),
+		  rules6(Point(30,285), "a number higher than 9."),
+		  rules7(Point(30,330), "The goal of the game is"),
+		  rules8(Point(30,375), "to get the highest score."),
+		  rules9(Point(30,420), "Press start game and good luck!"),
+		  rules10(Point(355,540), "Start Game! "),
+		  toggle_button{Point{350,514}, 170, 30, "Start Game",
 		  [](Address, Address pw) {reference_to<splash_screen>(pw).toggle();}},
           quit_button{Point{x_max() - 30,0}, 30, 20, "Quit",
 		  [](Address, Address pw) {reference_to<splash_screen>(pw).quit();}},
-		  actual_start_button{Point{305,347}, 88, 16, "Start Game",
+		  actual_start_button{Point{350,514}, 170, 30, "Start Game",
 		  [](Address, Address pw) {reference_to<splash_screen>(pw).actual_start();}}
 {
           attach(bg);
@@ -50,12 +50,14 @@ splash_screen::splash_screen(Point xy, int w, int h, const string& title)
 		  game_name.set_font_size(35);
 		  attach(game_name);
 		  assistance.set_color(Color::white);
+		  assistance.set_font_size(20);
 		  attach(assistance);
 		  
 		  start.set_fill_color(Color::yellow);
 		  attach(start);
 		  qquit.set_fill_color(Color::yellow);
 		  attach(qquit);
+		  go.set_font_size(30);
 		  attach(go);
 		  attach(end);
 		  attach(toggle_button);
@@ -96,15 +98,16 @@ void splash_screen::toggle()
 		  rules7.set_font(Graph_lib::Font::times_bold);
 		  rules8.set_font(Graph_lib::Font::times_bold);
 		  rules9.set_font(Graph_lib::Font::times_bold);
-		  rules1.set_font_size(35);
-		  rules2.set_font_size(30);
-		  rules3.set_font_size(30);
-		  rules4.set_font_size(30);
-		  rules5.set_font_size(30);
-		  rules6.set_font_size(30);
-		  rules7.set_font_size(30);
-		  rules8.set_font_size(30);
-		  rules9.set_font_size(30);
+		  rules1.set_font_size(45);
+		  rules2.set_font_size(40);
+		  rules3.set_font_size(40);
+		  rules4.set_font_size(40);
+		  rules5.set_font_size(40);
+		  rules6.set_font_size(40);
+		  rules7.set_font_size(40);
+		  rules8.set_font_size(40);
+		  rules9.set_font_size(40);
+		  rules10.set_font_size(30);
 		  attach(rules1);
 		  attach(rules2);
 		  attach(rules3);
