@@ -1,8 +1,3 @@
-// tile.cpp
-// Created: 10/27 by Zach Scott
-//
-// This file defines all of the tile-related classes, etc. declared in tile.h
-
 #include "tile.h"
 
 using Tile::TileType;

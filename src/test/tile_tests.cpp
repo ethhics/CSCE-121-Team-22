@@ -1,8 +1,3 @@
-// tile_tests.cpp
-// Created: 10/28 by Zach Scott
-//
-// This file tests the implementation of tiles in tile.h and tile.cpp
-
 #include "../defs.h"
 
 using Tile::TileType;

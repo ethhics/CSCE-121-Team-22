@@ -1,8 +1,3 @@
-// game_screen.cpp
-// Created: 11/16 by Zach Scott
-//
-// This file defines a window from game_screen.h which prints a tileset on the screen.
-
 #include "defs.h"
 #include "game_screen.h"
 

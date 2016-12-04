@@ -1,9 +1,3 @@
-// tile.h
-// Created: 10/27 by Zach Scott
-//
-// This file declares all of the tile-related classes, enums, functions, and
-// structs that are defined in tile.cpp
-
 #ifndef TILE_H
 #define TILE_H
 

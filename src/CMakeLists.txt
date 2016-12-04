@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/../bin)
 find_package(FLTK)
 
 add_library(ourlib tile.cpp calculator.cpp splash_screen.cpp
-	highscore_screen.cpp game_screen.cpp)
+	highscore_screen.cpp game_screen.cpp initials_screen.cpp)
 add_library(dependencies ../include/Graph.cpp ../include/GUI.cpp
 	../include/Simple_window.cpp ../include/Window.cpp)
 set(LIBS ${FLTK_LIBRARY} ${FLTK_IMAGES_LIBRARY} dependencies ourlib)

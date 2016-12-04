@@ -7,5 +7,6 @@
 #include "splash_screen.h"
 #include "highscore_screen.h"
 #include "game_screen.h"
+#include "initials_screen.h"
 
 #endif

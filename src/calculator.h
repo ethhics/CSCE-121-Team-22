@@ -1,9 +1,3 @@
-// calculator.h
-// Created: 10/29 by Zach Scott
-// Original code by Bjarne Stroupstrup
-//
-// This file declares calculator-related classes and functions
-
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 

@@ -1,8 +1,3 @@
-// game_screen.h
-// Created: 11/16 by Zach Scott
-//
-// This file declares a window which prints a tileset on the screen.
-
 #ifndef GAME_H
 #define GAME_H
 

@@ -1,9 +1,3 @@
-// calculator.cpp
-// Created: 10/29 by Zach Scott
-// Original code by Bjarne Stroupstrup
-//
-// This file implements the functions and classes in calculator.h
-
 #include "calculator.h"
 
 using Calculator::Token;
